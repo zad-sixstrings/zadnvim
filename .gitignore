@@ -1,0 +1,8 @@
+# Lazy.nvim plugin lockfile
+lazy-lock.json
+
+# Others
+.DS_Store
+*.swp
+*.swo
+*~
