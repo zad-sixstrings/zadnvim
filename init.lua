@@ -4,6 +4,7 @@ vim.opt.termguicolors = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
+vim.opt.termguicolors = true
 
 -- Keybindings
 vim.g.mapleader = " " -- Set spacebar as leader key
@@ -23,6 +24,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+
   -- Cyberpunk theme
   {
     "scottmckendry/cyberdream.nvim",
@@ -32,9 +34,52 @@ require("lazy").setup({
         transparent = true,
         italic_comments = true,
         variant = "dark",
-        saturation = 0.6,
+        saturation = 0.7,
       })
       vim.cmd("colorscheme cyberdream")
+    end,
+  },
+
+  -- Lualine status line
+
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("lualine").setup({
+        options = { 
+          theme = "codedark",
+          icons_enabled = true,
+        },
+      })
+    end,
+  },
+
+  -- Noice floating elements
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {},
+    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify", },
+    config = function()
+      require("noice").setup({
+        lsp = {
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+          },
+        },
+        -- you can enable a preset for easier configuration
+        presets = {
+          bottom_search = true, -- use a classic bottom cmdline for search
+          command_palette = true, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false, -- add a border to hover docs and signature help
+        },
+      })
     end,
   },
 
@@ -134,7 +179,7 @@ require("lazy").setup({
       require("nvim-ts-autotag").setup()
     end,
   },
-  
+
   -- File Explorer sidebar
   {
     "nvim-tree/nvim-tree.lua",
