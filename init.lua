@@ -131,8 +131,8 @@ require("lazy").setup({
       cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
       cmp.setup({
         mapping = {
-          ["<Up>"] = cmp.mapping.select_next_item(),
-          ["<Down>"] = cmp.mapping.select_prev_item(),
+          ["<Down>"] = cmp.mapping.select_next_item(),
+          ["<Up>"] = cmp.mapping.select_prev_item(),
           ["<Tab>"] = cmp.mapping.confirm({ select = true }),
         },
         sources = {
